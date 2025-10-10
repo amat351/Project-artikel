@@ -28,7 +28,7 @@
       </svg>
       <div>
         <div class="text-lg font-semibold text-gray-700">No. Telepon</div>
-        <div class="text-gray-500">+62 812-3456-7890</div>
+        <div class="text-gray-500">+62 813-7113-9471</div>
       </div>
     </div>
   </div>
