@@ -16,12 +16,12 @@
         <button @click="activeTab = 'dashboard'"
           :class="{ 'bg-blue-500 text-white': activeTab === 'dashboard', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'dashboard' }"
           class="px-4 py-2 rounded-lg transition duration-200">
-          Dashboard
+          Aidul
         </button>
         <button @click="activeTab = 'team'"
           :class="{ 'bg-blue-500 text-white': activeTab === 'team', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'team' }"
           class="px-4 py-2 rounded-lg transition duration-200">
-          User
+          ekaa
         </button>
       </div>
 
