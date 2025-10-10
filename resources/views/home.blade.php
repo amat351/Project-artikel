@@ -14,13 +14,13 @@
       <!-- Navigation Tabs -->
       <div class="flex justify-center mb-8 space-x-4">
         <button @click="activeTab = 'dashboard'"
-          :class="{ 'bg-blue-600 text-white shadow-lg': activeTab === 'dashboard', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'dashboard' }"
-          class="px-5 py-2 rounded-lg font-semibold transition duration-300">
+          :class="{ 'bg-blue-500 text-white': activeTab === 'dashboard', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'dashboard' }"
+          class="px-4 py-2 rounded-lg transition duration-200">
           Dashboard
         </button>
         <button @click="activeTab = 'team'"
-          :class="{ 'bg-blue-600 text-white shadow-lg': activeTab === 'team', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'team' }"
-          class="px-5 py-2 rounded-lg font-semibold transition duration-300">
+          :class="{ 'bg-blue-500 text-white': activeTab === 'team', 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200': activeTab !== 'team' }"
+          class="px-4 py-2 rounded-lg transition duration-200">
           User
         </button>
       </div>
