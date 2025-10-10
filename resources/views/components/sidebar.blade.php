@@ -1,7 +1,7 @@
 <div x-data="{ open: false }" class="flex min-h-screen">
   <!-- Sidebar -->
   <div 
-    class="fixed inset-y-0 left-0 z-40 w-64 bg-black shadow-lg  transform transition-transform duration-300
+    class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg  transform transition-transform duration-300
            md:translate-x-0 md:flex-shrink-0"
     :class="open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'">
 
@@ -17,7 +17,7 @@
 
     <!-- Bagian isi + scroll -->
     <div class="flex-1 overflow-y-auto">
-      <ul class="nav nav-pills flex-column gap-1 p-3">
+      <ul class="nav nav-pills flex-column gap-1 p-3 mb-auto">
         <li class="nav-item">
           <a href="{{ url('/admin/posts') }}" class="nav-link {{ Request::is('admin/posts') ? 'active' : 'text-dark' }}">
             Manage Posts
@@ -33,8 +33,8 @@
             Blog
           </a>
         </li>
-        <li>
-           <a class="nav-link" href="{{ url('/admin/messags') }}">
+        <li class="nav-item">
+           <a class="nav-link" href="{{ url('/admin/messages') }}">
     Pesan 
     @php $unread = \App\Models\Message::where('is_read', false)->count(); @endphp
     @if($unread > 0)

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="text-3xl font-bold mb-5 mt-5">Manage Posts</h1>
+    <h1 class="text-3xl font-bold mb-5 mt-5 text-center">Admin Articel</h1>
 
     <x-alert-success />
     <x-alert-error />

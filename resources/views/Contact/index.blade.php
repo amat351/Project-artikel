@@ -22,9 +22,9 @@
                     <li>
                         <span class="font-medium">Social:</span>
                         <div class="flex space-x-3 mt-1">
-                            <a href="https://facebook.com/admin" target="_blank" class="text-blue-600 hover:underline">Facebook</a>
-                            <a href="https://twitter.com/admin" target="_blank" class="text-sky-500 hover:underline">Twitter</a>
-                            <a href="https://instagram.com/AMAT_KPT_2008" target="_blank" class="text-pink-500 hover:underline">Instagram</a>
+                            <a href="https://facebook.com/" target="_blank" class="text-blue-600 hover:underline">Facebook</a>
+                            <a href="https://twitter.com/" target="_blank" class="text-sky-500 hover:underline">Twitter</a>
+                            <a href="https://instagram.com/amat_kpt" target="_blank" class="text-pink-500 hover:underline">Instagram</a>
                         </div>
                     </li>
                 </ul>

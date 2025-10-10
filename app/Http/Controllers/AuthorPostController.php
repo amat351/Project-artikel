@@ -88,7 +88,7 @@ class AuthorPostController extends Controller
             'slug'        => 'required|unique:posts,slug,' . $post->id,
             'body'        => 'required',
             'category_id' => 'required|exists:categories,id',
-            'photo'       => 'nullabe|image|mimes:jpg,jpeg,png|max:2048',
+            'photo'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
             // kalau upload file baru

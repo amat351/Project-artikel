@@ -1,56 +1,71 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="text-3xl font-bold mt-5 mb-4">Manage Messages</h1>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-10 px-4 sm:px-6 lg:px-8 animate-fadeInUp">
+
+    <!-- Title -->
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight animate-slideInLeft">
+            📩 Kelola Pesan
+        </h1>
+        <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded animate-growLine"></div>
+    </div>
 
     <x-alert-success />
     <x-alert-error />
 
     {{-- Desktop: Table Layout --}}
-    <div class="hidden md:block">
-        <div class="bg-white shadow rounded-lg">
+    <div class="hidden md:block animate-fadeInUp delay-150">
+        <div class="bg-white/90 backdrop-blur-sm shadow-lg rounded-xl border border-gray-200 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
             <div class="overflow-x-auto">
-                <table class="w-full border border-gray-200 text-sm">
-                    <thead class="bg-gray-100">
+                <table class="w-full text-sm text-gray-700">
+                    <thead class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white uppercase text-xs">
                         <tr>
-                            <th class="border p-2 text-center">Name</th>
-                            <th class="border p-2 text-center">Username</th>
-                            <th class="border p-2 text-center">Email</th>
-                            <th class="border p-2 text-center">Message</th>
-                            <th class="border p-2 text-center">Date</th>
-                            <th class="border p-2 text-center">Action</th>
+                            <th class="p-3 text-center">Name</th>
+                            <th class="p-3 text-center">Username</th>
+                            <th class="p-3 text-center">Email</th>
+                            <th class="p-3 text-center">Message</th>
+                            <th class="p-3 text-center">Date</th>
+                            <th class="p-3 text-center">Status</th>
+                            <th class="p-3 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($messages as $message)
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="border p-2">{{ $message->name }}</td>
-                                <td class="border p-2">{{ $message->username }}</td>
-                                <td class="border p-2">{{ $message->email }}</td>
-                                <td class="border p-2 truncate max-w-xs">{{ Str::limit($message->body, 50) }}</td>
-                                <td class="px-4 py-2 border">
+                            <tr class="hover:bg-blue-50/70 transition-all duration-300 ease-in-out">
+                                <td class="border-t p-3 text-center font-medium">{{ $message->name }}</td>
+                                <td class="border-t p-3 text-center">{{ $message->username }}</td>
+                                <td class="border-t p-3 text-center text-blue-600">{{ $message->email }}</td>
+                                <td class="border-t p-3 text-center truncate max-w-xs">{{ Str::limit($message->body, 50) }}</td>
+                                <td class="border-t p-3 text-center">
                                     {{ $message->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
                                 </td>
-                                <td class="px-4 py-2 border">
-                                    <div class="flex flex-col sm:flex-row gap-2 justify-center">
-                                        <a href="{{ route('admin.messages.show', $message) }}"
-                                           class="bg-green-600 text-white px-4 py-1 rounded text-xs text-center no-underline hover:bg-green-700 transition-colors">
-                                            Show
-                                        </a>
-                                        <form action="{{ route('admin.messages.destroy', $message) }}" method="POST"
-                                              onsubmit="return confirm('Yakin mau hapus?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="bg-red-600 text-white px-4 py-1 rounded text-xs w-full sm:w-auto hover:bg-red-700 transition-colors">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </div>
+                                <td class="border-t p-3 text-center">
+                                    @if($message->is_read)
+                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-semibold animate-pulse">Read</span>
+                                    @else
+                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-semibold animate-pulse">Unread</span>
+                                    @endif
+                                </td>
+                                <td class="border-t p-3 text-center space-x-2">
+                                    <a href="{{ route('admin.messages.show', $message) }}"
+                                       class="inline-block bg-green-600 text-white px-4 py-1 rounded-lg text-xs font-semibold hover:bg-green-700 hover:scale-105 transform transition-all duration-300 shadow-md">
+                                       Show
+                                    </a>
+                                    <form action="{{ route('admin.messages.destroy', $message) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                onclick="return confirm('Yakin mau hapus?')"
+                                                class="bg-red-600 text-white px-4 py-1 rounded-lg text-xs font-semibold hover:bg-red-700 hover:scale-105 transform transition-all duration-300 shadow-md">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-4 text-gray-500">No messages</td>
+                                <td colspan="7" class="py-6 text-center text-gray-500 animate-fadeInSlow">No messages</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -60,80 +75,58 @@
     </div>
 
     {{-- Mobile: Card Layout --}}
-    <div class="md:hidden space-y-4">
+    <div class="md:hidden space-y-5 mt-6 animate-fadeInUp delay-300">
         @forelse($messages as $message)
-            <div class="bg-white shadow rounded-lg p-4 border border-gray-200">
-                {{-- Header: Name & Date --}}
-                <div class="flex justify-between items-start mb-3">
-                    <h3 class="font-semibold text-lg">{{ $message->name }}</h3>
-                    <span class="text-sm text-gray-500 ml-2">
+            <div class="bg-white/90 backdrop-blur-sm shadow-md rounded-xl p-4 border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold text-lg text-gray-800">{{ $message->name }}</h3>
+                    <span class="text-sm text-gray-500">
                         {{ $message->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
                     </span>
                 </div>
 
-                {{-- Body: Details --}}
-                <div class="space-y-2 mb-4 text-sm">
+                <div class="space-y-2 text-sm text-gray-700">
+                    <div><span class="font-medium">Username:</span> {{ $message->username }}</div>
+                    <div><span class="font-medium">Email:</span> {{ $message->email }}</div>
                     <div>
-                        <span class="font-medium text-gray-700">Username:</span>
-                        <span class="ml-1">{{ $message->username }}</span>
-                    </div>
-                    <div>
-                        <span class="font-medium text-gray-700">Email:</span>
-                        <span class="ml-1">{{ $message->email }}</span>
-                    </div>
-                    <div>
-                        <span class="font-medium text-gray-700">Message:</span>
-                        <span class="ml-1 block">{{ Str::limit($message->body, 100) }}</span> {{-- Lebih panjang di mobile untuk readability --}}
-                        @if(strlen($message->body) > 100)
-                            <button onclick="toggleMessage({{ $message->id }})" class="text-blue-500 text-xs underline mt-1">Read more</button>
-                            <div id="message-{{ $message->id }}" class="hidden mt-1 text-sm text-gray-600">{{ $message->body }}</div>
+                        <span class="font-medium">Status:</span>
+                        @if($message->is_read)
+                            <span class="text-green-600 font-semibold ml-1">Read</span>
+                        @else
+                            <span class="text-red-600 font-semibold ml-1">Unread</span>
                         @endif
+                    </div>
+                    <div>
+                        <span class="font-medium">Message:</span>
+                        <span class="block mt-1">{{ Str::limit($message->body, 100) }}</span>
                     </div>
                 </div>
 
-                {{-- Footer: Actions (Stacked di mobile kecil, horizontal di sm+) --}}
-                <div class="flex flex-col sm:flex-row gap-2 pt-3 border-t border-gray-100">
+                <div class="flex flex-col sm:flex-row gap-2 pt-4 mt-3 border-t border-gray-100">
                     <a href="{{ route('admin.messages.show', $message) }}"
-                       class="bg-green-600 text-white px-4 py-2 rounded text-sm text-center no-underline hover:bg-green-700 transition-colors flex-1 sm:flex-none">
+                       class="bg-green-600 text-white px-4 py-2 rounded-md text-sm text-center font-semibold hover:bg-green-700 hover:scale-105 transform transition-all duration-300 shadow-md">
                         Show
                     </a>
                     <form action="{{ route('admin.messages.destroy', $message) }}" method="POST"
-                          onsubmit="return confirm('Yakin mau hapus?')" class="flex-1 sm:flex-none">
+                          onsubmit="return confirm('Yakin mau hapus?')">
                         @csrf
                         @method('DELETE')
-                        <button class="bg-red-600 text-white px-4 py-2 rounded text-sm w-full hover:bg-red-700 transition-colors">
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-md text-sm w-full font-semibold hover:bg-red-700 hover:scale-105 transform transition-all duration-300 shadow-md">
                             Delete
                         </button>
                     </form>
                 </div>
             </div>
         @empty
-            <div class="bg-white shadow rounded-lg p-8 text-center text-gray-500">
+            <div class="bg-white/80 backdrop-blur-md shadow-md rounded-lg p-8 text-center text-gray-500 animate-fadeInSlow">
                 No messages
             </div>
         @endforelse
     </div>
 
-    {{-- Pagination (Visible di semua ukuran) --}}
-    <div class="mt-6">
+    {{-- Pagination --}}
+    <div class="mt-8 animate-fadeInUp delay-500">
         {{ $messages->links() }}
     </div>
+</div>
 @endsection
-
-{{-- Optional: JS untuk Expandable Message di Mobile (jika message panjang) --}}
-@push('scripts')
-<script>
-function toggleMessage(id) {
-    const messageDiv = document.getElementById('message-' + id);
-    const button = event.target;
-    
-    if (messageDiv.classList.contains('hidden')) {
-        messageDiv.classList.remove('hidden');
-        button.textContent = 'Read less';
-    } else {
-        messageDiv.classList.add('hidden');
-        button.textContent = 'Read more';
-    }
-}
-</script>
-@endpush

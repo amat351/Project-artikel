@@ -143,20 +143,6 @@ Route::prefix('author')->middleware(['auth', 'role:author'])->group(function () 
 });
 
 //==============================================
-// CRUD Post untuk user biasa
-//==============================================
-Route::prefix('user')->middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/posts', [AuthorPostController::class, 'index'])->name('author.posts.index');
-    Route::get('/posts/create', [AuthorPostController::class, 'create'])->name('author.posts.create');
-    Route::post('/posts', [AuthorPostController::class, 'store'])->name('author.posts.store');
-    Route::get('/posts/{post}/edit', [AuthorPostController::class, 'edit'])->name('author.posts.edit');
-    Route::put('/posts/{post}', [AuthorPostController::class, 'update'])->name('author.posts.update');
-    Route::delete('/posts/{post}', [AuthorPostController::class, 'destroy'])->name('author.posts.destroy');
-    Route::get('/posts/{post}', [AuthorPostController::class, 'show'])->name('author.posts.show');
-    Route::get('/dashboard', [AuthorPostController::class, 'dashboard'])->name('author.dashboard');
-});
-
-//==============================================
 // Contact untuk users/authors
 //==============================================
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index')->middleware('auth');

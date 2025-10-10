@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 
 @section('content') 
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
     <!-- Header Navbar -->
     <div class="top-0 left-0 mb-8 w-full bg-gray-100 text-white shadow z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl text-center mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Brand / Title -->
-                <div class="text-lg font-semibold">
+                <div class="text-lg font-semibold w-full">
                     <a href="{{ url('/admin/users') }} "
                        class="px-3 py-2 rounded no-underline text-dark hover:text-primary-600 {{ request()->routeIs('users.*') ? 'bg-gray-100' : '' }}">
                          Users
